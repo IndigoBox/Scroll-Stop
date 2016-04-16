@@ -1,0 +1,230 @@
+body
+{
+	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+	font-size: 100%;
+	margin: 0px;
+}
+a
+{
+	color: black;
+	text-decoration: none;
+}
+input
+{
+	padding-left: 5px;
+}
+#sideMenu li
+{
+	position: relative;
+	top: 70px;
+	list-style: none;
+	font-weight: bolder;
+	font-size: 20px;
+}
+#sideMenu a
+{
+	transition: color 0.2s;
+}
+#sideMenu a:hover
+{
+	color: red;
+}
+#sideMenu a.active
+{
+	cursor: default;
+	color: red;
+	text-decoration: none !important;
+}
+ul
+{
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+#header
+{
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	color: black;
+	height: 60px;
+	min-width: 860px;
+	/* Old from indigoBox: background: linear-gradient(to bottom, #222222, #111111); */
+	background: #D2CFCF;
+}
+#headerText
+{
+  top: 21%;
+  left: 85px;
+  width: 50%;
+  position: relative;
+  font-size: 24px;
+}
+#main
+{
+	position: relative;
+	top: 60px;
+	left: 260px;
+	width: 70%;
+	min-width: 600px;
+}
+#pxNum
+{
+	width: 50px;
+}
+#sideMenu
+{
+	position: absolute;
+	z-index: 0;
+	bottom: 0px;
+	width: 210px;
+	height: 100%;
+	background: linear-gradient(to right, white, rgb(228, 228, 228));
+}
+#siteTitler
+{
+	font-size: 26px;
+	color: red;
+	position: relative;
+	top: 10px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	width: 50%;
+}
+#indigoBox
+{
+	 color: #A94EFF;
+  font-weight: bold;
+  text-decoration: underline;
+}
+#about
+{
+	position: relative;
+	top: 5px;
+	font-size: 18px;
+}
+#about img:hover
+{
+	position: relative;
+	top: 2px;
+	border-bottom: solid 2px rgb(179, 80, 179);
+}
+.option-row
+{
+	position: relative;
+	margin-top: 8px;
+	margin-bottom: 5px;
+}
+.closeImage
+{
+	cursor: pointer;
+	width: 19px;
+	left: 505px;
+	padding: 5px;
+	top: -3px;
+	position: absolute;
+    border-radius: 100px;
+	transition: background 0.2s;
+}
+.closeImage:hover
+{
+	background: #D8D8D8;
+}
+#popupBody
+{
+	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+	font-size: 100%;
+	width: 250px;
+	background: #F7F7F7;
+}
+#status
+{
+	margin-top: 3px;
+}
+#popupTitle
+{
+	margin-top: 0px;
+    margin-bottom: 0px;
+    position: absolute;
+    top: 10px;
+    left: 70px;
+    font-size: 24px;
+    font-weight: normal;
+}
+#popupLogo
+{
+	position: relative;
+	top: 2px;
+	left: 12px;
+	width: 48px;
+}
+#logo
+{
+	position: absolute;
+	top: 6px;
+	left: 20px;
+}
+#sectionTitle
+{
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: 21px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+#checkmark
+{
+	position: absolute;
+	height: 21px;
+	color: green;
+	top: 2px;
+	left: 160px;
+}
+#pause
+{
+	cursor: pointer;
+}
+.separator
+{
+	width: 100%;
+	border-top: 2px groove white;
+	margin: 5px -5px 5px -3px;
+}
+.popupText
+{
+	margin-left: 5px;
+}
+.popupText b
+{
+	/*margin-left: 5px;*/
+}
+#cog
+{
+	height: 20px;
+	position: relative;
+	top: 4px;
+	left: 5px;
+}
+#options-cont
+{
+	border-top: solid 2px grey;
+	margin-top: 5px;
+	padding-bottom: 5px;
+	background: #D4D4D4;
+}
+#options-cont:hover
+{
+	background: #BDBDBD;
+}
+#facebook
+{
+	color: darkblue;
+}
+#facebook:hover
+{
+	text-decoration: underline;
+}
+#buttons-bar
+{
+	position: relative;
+	margin-top: 5px;
+}

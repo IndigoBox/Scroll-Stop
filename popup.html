@@ -1,0 +1,29 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Scroll Stop</title>
+    <script src="jquery-1.11.2.min.js"></script>
+	<script src="popup.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body id="popupBody">
+	<img id="popupLogo" src="icon48.png">
+	<h3 id="popupTitle">Scroll Stop</h3>
+	<div class="separator"></div>
+	<div class="popupText" id="status"></div>
+	<!-- <span class="popupText" id="pause">Pause Scroll Stop</span><br> -->
+	<a id="options" href="/options.html">
+	<div id="options-cont">
+		<img id="cog" src="cog.svg" style="height: 20px">
+		<span class="popupText">Options</span>
+	</div>
+	</a>
+  </body>
+</html>
+

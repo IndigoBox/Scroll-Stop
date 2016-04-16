@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+
+  "name": "Scroll Stop",
+  "options_page": "options.html",
+  "description": "Stop scrolling too far, and stay focused on what's important",
+  "version": "0.0.4",
+
+  "content_scripts": [
+    {
+      "matches": [ "http://*/*", "https://*/*"],
+      "js": ["inline.js"]
+    }
+  ],
+  "browser_action":
+  {
+    "default_icon": "icon19-grey.png",
+    "default_popup": "popup.html"
+  },
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+	"tabs",
+    "https://ajax.googleapis.com/"
+  ]
+}

@@ -1,0 +1,142 @@
+var siteURLs = ['']; //array of sites
+var sitePxs = [1]; //array of pixel numbers (parralel to siteURLs)
+
+console.log(siteURLs); 
+
+var popped = siteURLs.push("CANANANNA");
+console.log(siteURLs);
+
+window.onload = function() 
+{
+	// executes when HTML-Document is loaded and DOM is ready
+	loadOptions();
+	document.getElementById("save").addEventListener("click", saveOptions);
+	document.getElementById("reset").addEventListener("click", eraseOptions);
+	document.getElementById("add").addEventListener("click", addSite);
+	document.getElementById("remove0").addEventListener("click", function(){removeSite(0)});
+};
+
+function addSite()
+{
+	siteURLs[siteURLs.length] = "";
+	sitePxs[sitePxs.length] = 0;
+	//document.getElementById("sites").innerHTML = document.getElementById("sites").innerHTML + 'On <input id="url" type="url"></input> stop at <input id="pxNum" type="number" min="0"></input> pixels <button id="remove0">Remove Site</button> <br>';
+	var index = siteURLs.length - 1;
+	document.getElementById("sites").insertAdjacentHTML('beforeend', '<span id="row' + index
+	+ '">On <input id="siteURL' + index
+	+ '" type="url"></input> stop at <input id="pxNum' + index
+	+ '" type="number" min="0"></input> pixels <button id="remove' + index
+	+ '">Remove Site</button> <br></span>');
+	document.getElementById("remove" + index).addEventListener("click", function(){removeSite(index)});
+	
+	
+	alert(siteURLs.length);
+}
+
+function addSiteField(index)
+{
+	document.getElementById("sites").insertAdjacentHTML('beforeend', '<span id="row' + index
+	+ '">On <input id="siteURL' + index
+	+ '" type="url"></input> stop at <input id="pxNum' + index
+	+ '" type="number" min="0"></input> pixels <button id="remove' + index
+	+ '">Remove Site</button> <br></span>');
+	document.getElementById("remove" + index).addEventListener("click", function(){removeSite(index)});
+}
+
+function removeSite(index)
+{
+	remove("row" + index);
+	siteURLs.pop();
+	alert(siteURLs.length);
+}
+
+function remove(id)
+{
+    var elem=document.getElementById(id)
+	if(elem != null)
+	elem.parentNode.removeChild(elem);
+	else
+	alert("NULL WITH ID " + id + "!");
+}
+
+function loadOptions() 
+{
+	var siteURL = localStorage["siteURL"];
+	var sitePx = localStorage["sitePx"];
+	
+	siteURLs = localStorage["siteURL"];
+	sitePxs = localStorage["sitePx"];
+
+	if(siteURLs == null)
+	{
+		siteURLs = [''];
+	}	
+	if(sitePxs == null)
+		sitePxs = [1];
+	
+	var closeBehav = localStorage["closeBehav"];
+	//document.getElementById("url").value = siteURL;
+	//document.getElementById("pxNum").value = sitePx;
+	
+	document.getElementsByName('siteURL0').value = siteURLs[0];
+	alert(siteURLs.length);
+	for(var i = 1; i < siteURLs.length; i++)
+	{
+		addSiteField(i);
+		document.getElementsByName('siteURL' + i).value = siteURLs[i];
+	}
+	
+	var radios = document.getElementsByName('closeBehav');
+
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].value == closeBehav) 
+		{
+			radios[i].checked = true;
+			break;
+		}
+	}
+}
+
+function saveOptions() 
+{
+	//var siteURL = document.getElementById("url").value;
+	//var sitePx = document.getElementById("pxNum").value;
+	var closeBehav = "";
+	//alert("Will stop on " + siteURL + " after " + sitePx + " pixels");
+	
+	for(var i = 0; i < siteURLs.length; i++)
+	{
+		siteURLs[i] = document.getElementById("siteURL" + i).value;
+	}
+	for(var i = 0; i < siteURLs.length; i++)
+	{
+		sitePxs[i] = document.getElementById("pxNum" + i).value;
+	}
+	
+	var radios = document.getElementsByName('closeBehav');
+
+	for (var i = 0; i < radios.length; i++) {
+		if (radios[i].checked) {
+			// do whatever you want with the checked radio
+			//alert(radios[i].value);
+			closeBehav = radios[i].value;
+			// only one radio can be logically checked, don't check the rest
+			break;
+		}
+	}
+	
+	localStorage["siteURLs"] = siteURLs;
+	localStorage["sitePxs"] = sitePxs;
+	
+	localStorage["siteURL"] = siteURL;
+	localStorage["sitePx"] = sitePx;
+	localStorage["closeBehav"] = closeBehav;
+}
+
+function eraseOptions() 
+{
+	localStorage.removeItem("siteURL");
+	localStorage.removeItem("sitePx");
+	localStorage.removeItem("closeBehav");
+	location.reload();
+}

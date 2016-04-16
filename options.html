@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- This is the options page -->
+<!-- Notes, add setting for what it does when you reach the value, either exit tab, pop back to the value, or remove body -->
+
+<html>
+  <head>
+    <title>Scroll Stop - Options</title>
+	<script type="text/javascript" src="options.js"></script>
+	<script src="jquery-1.11.2.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+	<body>
+	<div id="header"><img id="logo" src="icon48.png"><div id="headerText">Scroll Stop</div></div>
+	<div id="sideMenu">
+		<li>
+		<ul><a class="active" href="/options.html">Settings</a></ul>
+		<ul><a href="/about.html">About</a></ul>
+		<ul><a href="/help.html">Help</a></ul>
+		</li>
+	</div>
+	<div id="main">
+		<div id="siteTitler">Sites To Limit</div>
+		<div id="sites">
+			<div class="option-row" id="row0">
+				On <input class="siteURL" id="siteURL0" placeholder="example.com" type="text"></input> stop after
+				<input class="pxNum" id="pxNum0" type="number" value ="5" min="0"></input> pixels <img class="closeImage" id="remove0" src="cross.png"><br>
+			</div>
+		</div>
+		<button id="add">Add Site</button>
+		<br><br>
+		<div id="siteTitler">Action</div>
+		What should happen when you scroll too far? <br>
+		<input type="radio" name="closeBehav" value="close" checked="checked">Close tab <br>
+		<input type="radio" name="closeBehav" value="remove">Make tab blank <br>
+		<input type="radio" name="closeBehav" value="alert">Print a reminder message<br>
+		<input type="radio" name="closeBehav" value="redirect">Go to <input id="redirectURL" placeholder="example.com" type="text"></input><br>
+		<div id="buttons-bar">
+		<button id="save">Save</button>
+		<button id="reset">Restore default</button>
+		<span id="checkmark" style="display: none">Saved &#x2714</span></div>
+	</div>
+  </body>
+</html>
+

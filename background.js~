@@ -1,0 +1,31 @@
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    //alert(request.method);
+	if (request.method == "getLocalStorage")
+    {
+		sendResponse({data: localStorage[request.key]});
+    }
+	else if(request.method == "blockIcon")
+	{
+		chrome.browserAction.setIcon
+		({
+				path: "/icon19.png",
+				tabId: sender.tab.id
+		});
+	}
+	else if(request.method == "normIcon")
+	{
+		chrome.browserAction.setIcon
+		({
+				path: "/icon2.png",
+				tabId: sender.tab.id
+		});
+	}
+	else if(request.method == "closeTab")
+	{
+		chrome.tabs.remove(sender.tab.id);
+	}
+	else
+	{
+      sendResponse({}); // snub them.
+	}  
+});
