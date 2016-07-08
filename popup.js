@@ -86,15 +86,15 @@ document.addEventListener('DOMContentLoaded', function()
 
 		if(siteURLs != null && siteBlocked(url))
 		{
-			renderStatus("<b>Scroll Stop Active - </b><br>This page is on your list, we'll be scroll stopping here!");
+			renderStatus("<div id='popupHeader' style='background-color:#F00'>Active</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>This page is on your list, we'll be scroll stopping here!</p></div>");
 		}
 		else if(siteURLs != null)
 		{
-			renderStatus("<b>Scroll Stop Inactive - </b><br>This page isn't on your list. Scroll away!");
+			renderStatus("<div id='popupHeader' style='background-color:#0F0'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>You’re free to scroll here. To change that, click on the button below.</p></div>");
 		}
 		else
 		{
-			renderStatus("<b>No Block Sites Found!</b><br>It looks like you need to add some sites to block!");
+			renderStatus("<div id='popupHeader' style='background-color:#AAA'>This is awkward.</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>Scroll Stop does not have any sites to restrict scrolling on right now.</p></div>");
 		}
   });
 });
