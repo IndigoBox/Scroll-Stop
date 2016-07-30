@@ -86,11 +86,11 @@ document.addEventListener('DOMContentLoaded', function()
 
 		if(siteURLs != null && siteBlocked(url))
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#F00'>Active</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>This page is on your list, we'll be scroll stopping here!</p></div>");
+			renderStatus("<div id='popupHeader' style='background-color:#0F0'>Active</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>This page is on your list, we'll be scroll stopping here!</p></div>");
 		}
 		else if(siteURLs != null)
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#0F0'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>You’re free to scroll here. To change that, click on the button below.</p></div>");
+			renderStatus("<div id='popupHeader' style='background-color:#F00'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>You’re free to scroll here. To change that, click on the button below.</p></div>");
 		}
 		else
 		{
