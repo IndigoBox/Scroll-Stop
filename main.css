@@ -114,11 +114,16 @@ ul
 	margin-top: 8px;
 	margin-bottom: 5px;
 }
+.limitType
+{
+	margin-left: 5px;
+	padding: 1px;
+}
 .closeImage
 {
 	cursor: pointer;
 	width: 19px;
-	left: 505px;
+	left: 535px;
 	padding: 5px;
 	top: -3px;
 	position: absolute;

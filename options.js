@@ -27,7 +27,7 @@ function addSiteField(index)
 	document.getElementById("sites").insertAdjacentHTML('beforeend', '<div class="option-row" id="row' + index
 	+ '">On <input class="siteURL" placeholder="example.com" id="siteURL' + index
 	+ '" type="text"></input> stop after <input class="pxNum" value="500" id="pxNum' + index
-	+ '" type="number" min="0"></input> pixels  <img class="closeImage" id="remove' + index
+	+ '" type="number" min="0"></input><select class="limitType"><option value="pixels">pixels</option><option value="screens">screens</option></select><img class="closeImage" id="remove' + index
 	+ '" src="cross.png"><br></div>');
 	document.getElementById("remove" + index).addEventListener("click", function(){removeSite(index)});
 }
@@ -120,6 +120,7 @@ function saveOptions()
 
 	var siteURLInputs = document.getElementsByClassName("siteURL");
 	var sitePxInputs = document.getElementsByClassName("pxNum");
+	var siteLimitSelection = document.getElementsByClassName("limitType");
 
 	for(var i = 0; i < siteURLInputs.length; i++)
 	{
@@ -128,7 +129,15 @@ function saveOptions()
 
 	for(var i = 0; i < sitePxInputs.length; i++)
 	{
-		sitePxs[i] = sitePxInputs[i].value;
+		var siteLimitType = siteLimitSelection[i].value;
+		if(siteLimitType == 'pixels')
+		{
+			sitePxs[i] = sitePxInputs[i].value;
+		}
+		else
+		{
+			sitePxs[i] = sitePxInputs[i].value * window.innerHeight;
+		}
 	}
 
 	var radios = document.getElementsByName('closeBehav');
