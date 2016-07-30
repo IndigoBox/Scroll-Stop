@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function()
 		}
 		else if(siteURLs != null)
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#F00'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>You’re free to scroll here. To change that, click on the button below.</p></div>");
+			renderStatus("<div id='popupHeader' style='background-color:#F00'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='icon48.png'><p>You're free to scroll here. To change that, click on the button below.</p></div>");
 		}
 		else
 		{
