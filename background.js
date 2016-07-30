@@ -1,5 +1,4 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    //alert(request.method);
 	if (request.method == "getLocalStorage")
     {
 		sendResponse({data: localStorage[request.key]});
@@ -65,7 +64,6 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 	{
 		passData();
 
-		//alert("activated " + tab.url);
 		if(siteBlocked(tab.url))
 		{
 			//set icon to blocked icon

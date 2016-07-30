@@ -58,47 +58,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 	}
 });
 
-/*
-chrome.runtime.sendMessage({method: "getLocalStorage", key: "siteURLs"}, function(response)
-{
-	siteURLs = response.data;
-
-	//after siteURL is loaded, use that data
-	//alert(siteURLs);
-
-	if(siteBlocked())
-	{
-		//alert("Blocked. Match with " + siteURLs);
-		pageMatch = true;
-	}
-	else
-	{
-		//alert("No block. No match with " + siteURL + " on " + window.location.href);
-	}
-});
-
-chrome.runtime.sendMessage({method: "getLocalStorage", key: "sitePxs"}, function(response)
-{
-	sitePxs = response.data;
-	sitePxs = sitePxs.split(",");
-});
-
-chrome.runtime.sendMessage({method: "getLocalStorage", key: "closeBehav"}, function(response)
-{
-	closeBehav = response.data;
-});
-*/
-
 window.onscroll = function(ev)
 {
-	//alert("For this site, scroll value is " + sitePxs[websiteIndex]);
 	if(sitePxs != null)
 	{
 		if(window.scrollY > sitePxs[websiteIndex] && pageMatch)
 		{
 			pageDeleted = true;
 
-			//alert("You've gone too far");
 			if(closeBehav == "close")
 			{
 				chrome.runtime.sendMessage({method: "closeTab"}, function(response)

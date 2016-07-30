@@ -17,7 +17,6 @@ function addSite()
 	siteURLs.push("");
 	sitePxs.push(0);
 
-	//document.getElementById("sites").innerHTML = document.getElementById("sites").innerHTML + 'On <input id="url" type="url"></input> stop at <input id="pxNum" type="number" min="0"></input> pixels <button id="remove0">Remove Site</button> <br>';
 	var index = siteURLs.length - 1;
 	addSiteField(index);
 }
@@ -79,11 +78,6 @@ function loadOptions()
 		document.getElementById("redirectURL").value = redirectURL;
 	}
 
-	//document.getElementById("url").value = siteURL;
-	//document.getElementById("pxNum").value = sitePx;
-
-	//document.getElementsById("siteURL0").value = "TEAST";
-
 	document.getElementById("siteURL0").value = siteURLs[0];
 	for(var i = 1; i < siteURLs.length; i++)
 	{
@@ -111,10 +105,7 @@ function loadOptions()
 
 function saveOptions()
 {
-	//var siteURL = document.getElementById("url").value;
-	//var sitePx = document.getElementById("pxNum").value;
 	var closeBehav = "";
-	//alert("Will stop on " + siteURL + " after " + sitePx + " pixels");
 
 	var redirectURL = document.getElementById("redirectURL").value;
 
