@@ -1,3 +1,6 @@
+# Vim temp files
+*.un~
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

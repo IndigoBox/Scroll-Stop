@@ -122,6 +122,10 @@ function passData() //pass parameters to the inline scripts
 
 function siteBlocked(url)
 {
+	if(typeof siteURLs == 'undefined' || siteURLs.length == 0)
+	{
+		return false;
+	}
 	var siteURLs = localStorage["siteURLs"];
 	var siteArray = siteURLs.split(",");
 	for(var i = 0; i < siteArray.length; i++)
