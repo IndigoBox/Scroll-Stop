@@ -1,5 +1,6 @@
 # Vim temp files
 *.un~
+*.js~
 
 # Windows image file caches
 Thumbs.db
