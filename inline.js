@@ -13,6 +13,8 @@ var paused = false;
 
 function siteBlocked()
 {
+	if(typeof siteURLs == 'undefined')
+		return false
 	var siteArray = siteURLs.split(",");
 	for(var i = 0; i < siteArray.length; i++)
 	{
@@ -28,7 +30,7 @@ function siteBlocked()
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	if (request.method == "setURLs")
-    {
+	{
 			siteURLs = request.data;
 			if(siteBlocked())
 			{
@@ -38,11 +40,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 			{
 				pageMatch = false;
 			}
-    }
+	}
 	else if(request.method == "setPxs")
 	{
 		sitePxs = request.data;
-		sitePxs = sitePxs.split(",");
+		if(typeof sitePxs !== 'undefined')
+			sitePxs = sitePxs.split(",");
 	}
 	else if(request.method == "setClose")
 	{

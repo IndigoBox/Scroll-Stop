@@ -66,6 +66,8 @@ function renderStatus(statusText)
 function siteBlocked(url)
 {
 	var siteURLs = localStorage["siteURLs"];
+	if(typeof siteURLs == 'undefined')
+		return false
 	var siteArray = siteURLs.split(",");
 	for(var i = 0; i < siteArray.length; i++)
 	{
