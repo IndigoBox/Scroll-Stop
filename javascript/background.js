@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	{
 		chrome.browserAction.setIcon
 		({
-				path: "/icon19.png",
+				path: "../images/icon19.png",
 				tabId: sender.tab.id
 		});
 	}
@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	{
 		chrome.browserAction.setIcon
 		({
-				path: "/icon19-grey.png",
+				path: "../images/icon19-grey.png",
 				tabId: sender.tab.id
 		});
 	}
@@ -38,7 +38,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 		{
 			chrome.browserAction.setIcon
 			({
-				path: "/icon19.png",
+				path: "../images/icon19.png",
 				tabId: tabId
 			});
 		}
@@ -49,7 +49,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 		{
 			chrome.browserAction.setIcon
 			({
-				path: "/icon19.png",
+				path: "../images/icon19.png",
 				tabId: tabId
 			});
 		}
@@ -69,7 +69,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 			//set icon to blocked icon
 			chrome.browserAction.setIcon
 			({
-				path: "/icon19.png",
+				path: "../images/icon19.png",
 				tabId: activeInfo.tabId
 			});
 		}
@@ -77,7 +77,7 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 		{
 			chrome.browserAction.setIcon
 			({
-				path: "/icon19-grey.png",
+				path: "../images/icon19-grey.png",
 				tabId: activeInfo.tabId
 			});
 		}

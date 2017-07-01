@@ -28,7 +28,7 @@ function addSiteField(index)
 	+ '" type="text"></input> stop after <input class="pxNum" value="500" id="pxNum' + index
 	+ '" type="number" min="0"></input><select class="limitType"><option value="pixels">pixels</option>'
 	+ '<option value="screens">screens</option></select><img class="closeImage" id="remove' + index
-	+ '" src="cross.png"><br></div>');
+	+ '" src="../images/cross.png"><br></div>');
 	document.getElementById("remove" + index).addEventListener("click", function(){removeSite(index)});
 }
 

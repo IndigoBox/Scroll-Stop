@@ -9,19 +9,19 @@
   "content_scripts": [
     {
       "matches": [ "http://*/*", "https://*/*"],
-      "js": ["inline.js"]
+      "js": ["javascript/inline.js"]
     }
   ],
   "browser_action":
   {
-    "default_icon": "icon19-grey.png",
+    "default_icon": "images/icon19-grey.png",
     "default_popup": "popup.html"
   },
-  "icons": { "16": "icon16.png",
-           "48": "icon48.png",
-          "128": "icon128.png" },
+  "icons": { "16": "images/icon16.png",
+           "48": "images/icon48.png",
+          "128": "images/icon128.png" },
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["javascript/background.js"],
     "persistent": false
   },
   "permissions": [
