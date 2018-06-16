@@ -80,6 +80,34 @@ function siteBlocked(url)
 	return false;
 }
 
+var blockedText = `
+<div id='popupHeader' style='background-color:#0F0'>
+  Active
+</div>
+<div id='popupRemainder'>
+  <img id='popupLogo' src='../images/icon48.png'>
+  <p>This page is on your list, we'll be scroll stopping here!</p>
+</div>`;
+
+var notBlockedText = `
+<div id='popupHeader' style='background-color:#F00'>
+  Inactive
+</div>
+<div id='popupRemainder'>
+  <img id='popupLogo' src='../images/icon48.png'>
+  <p>You're free to scroll here. To change that, click on the button below.</p>
+</div>`;
+
+var noSitesText = `
+<div id='popupHeader' style='background-color:#AAA'>
+  No Sites Added
+</div>
+<div id='popupRemainder'>
+  <img id='popupLogo' src='../images/icon48.png'>
+  <p>Scroll Stop does not have any sites to restrict scrolling on right now.</p>
+</div>`;
+
+
 document.addEventListener('DOMContentLoaded', function()
 {
 	getCurrentTabUrl(function(url)
@@ -88,15 +116,15 @@ document.addEventListener('DOMContentLoaded', function()
 
 		if(siteURLs != null && siteBlocked(url))
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#0F0'>Active</div><div id='popupRemainder'><img id='popupLogo' src='../images/icon48.png'><p>This page is on your list, we'll be scroll stopping here!</p></div>");
+			renderStatus(blockedText);
 		}
 		else if(siteURLs != null)
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#F00'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='../images/icon48.png'><p>You're free to scroll here. To change that, click on the button below.</p></div>");
+			renderStatus(notBlockedText);
 		}
 		else
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#AAA'>This is awkward.</div><div id='popupRemainder'><img id='popupLogo' src='../images/icon48.png'><p>Scroll Stop does not have any sites to restrict scrolling on right now.</p></div>");
+			renderStatus(noSitesText);
 		}
   });
 });
