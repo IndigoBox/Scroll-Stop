@@ -81,7 +81,7 @@ function siteBlocked(url)
 }
 
 var blockedText = `
-<div id='popupHeader' style='background-color:#0F0'>
+<div id='popupHeader' style='background-color:#707070'>
   Active
 </div>
 <div id='popupRemainder'>
@@ -99,13 +99,24 @@ var notBlockedText = `
 </div>`;
 
 var noSitesText = `
-<div id='popupHeader' style='background-color:#AAA'>
-  No Sites Added
+<div id='popupHeader' style='background-color:#707070'>
+  <i class="material-icons">
+    announcement
+  </i>
+  <span class="popupHeaderText">
+    No Sites Added
+  </span>
 </div>
 <div id='popupRemainder'>
-  <img id='popupLogo' src='../images/icon48.png'>
-  <p>Scroll Stop does not have any sites to restrict scrolling on right now.</p>
-</div>`;
+  <p class="popupRemainderText">There are <span class="textEmphasize">no</span>
+  sites set up for Scroll Stop to watch right now.</p>
+</div>
+<div id='popupButtonSection'>
+</div>
+<div id='popupGoToSettings'>
+</div>
+
+`;
 
 
 document.addEventListener('DOMContentLoaded', function()
