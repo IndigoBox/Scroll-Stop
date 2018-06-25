@@ -111,11 +111,16 @@ var noSitesText = `
   <p class="popupRemainderText">There are <span class="textEmphasize">no</span>
   sites set up for Scroll Stop to watch right now.</p>
 </div>
-<div id='popupButtonSection'>
+<div id='button-container'>
+  <button class="button-limit">
+    <i class="material-icons">
+      public
+    </i>
+    <span class="button-limit-text">
+      Limit this page
+    </span>
+    </button>
 </div>
-<div id='popupGoToSettings'>
-</div>
-
 `;
 
 
