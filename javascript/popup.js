@@ -69,8 +69,12 @@ function siteBlocked(url)
 	if(typeof siteURLs == 'undefined')
 		return false
 	var siteArray = siteURLs.split(",");
-	for(var i = 0; i < siteArray.length; i++)
+  // Why length - 1? It turns out that the split has '' as an element in the array.
+  // But '' is in everything, so this would always report active.
+	for(var i = 0; i < siteArray.length - 1; i++)
 	{
+    console.log(url);
+    console.log(siteArray[i]);
 		if(url.indexOf(siteArray[i]) > -1)
 		{
 			websiteIndex = i;
@@ -81,22 +85,53 @@ function siteBlocked(url)
 }
 
 var blockedText = `
-<div id='popupHeader' style='background-color:#707070'>
-  Active
+<div id='popupHeader' style='background-color:#303f9f'>
+  <i class="material-icons">
+    track_changes
+  </i>
+  <span class="popupHeaderText">
+    Active
+  </span>
 </div>
 <div id='popupRemainder'>
-  <img id='popupLogo' src='../images/icon48.png'>
-  <p>This page is on your list, we'll be scroll stopping here!</p>
+  <p class="popupRemainderText">This page is on your list.
+  <span class="textEmphasize">We'll be scroll stopping here!</span>
+  </p>
+</div>
+<div id='button-container'>
+  <button class="button-limit">
+    <i class="material-icons">
+      public
+    </i>
+    <span class="button-limit-text">
+      Stop blocking this page
+    </span>
+    </button>
 </div>`;
 
 var notBlockedText = `
-<div id='popupHeader' style='background-color:#F00'>
-  Inactive
+<div id='popupHeader' style='background-color:#546e7a'>
+  <i class="material-icons">
+    notifications_off
+  </i>
+  <span class="popupHeaderText">
+    Inactive
+  </span>
 </div>
 <div id='popupRemainder'>
-  <img id='popupLogo' src='../images/icon48.png'>
-  <p>You're free to scroll here. To change that, click on the button below.</p>
-</div>`;
+  <p class="popupRemainderText">You're <span class="textEmphasize">free to scroll</span> here.
+  To change that, click on the button below.</p>
+</div>
+<div id='button-container'>
+  <button class="button-limit">
+    <i class="material-icons">
+      public
+    </i>
+    <span class="button-limit-text">
+      Limit this page
+    </span>
+    </button>
+</div>`
 
 var noSitesText = `
 <div id='popupHeader' style='background-color:#707070'>
