@@ -4,7 +4,7 @@
   "name": "Scroll Stop",
   "options_page": "options.html",
   "description": "Stop scrolling too far, and stay focused on what's important",
-  "version": "0.0.4",
+  "version": "0.0.6",
 
   "content_scripts": [
     {
