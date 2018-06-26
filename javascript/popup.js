@@ -94,8 +94,8 @@ var blockedText = `
   </span>
 </div>
 <div id='popupRemainder'>
-  <p class="popupRemainderText">This page is on your list.
-  <span class="textEmphasize">We'll be scroll stopping here!</span>
+  <p class="popupRemainderText">You've limited scrolling on this site.
+  <span class="textEmphasize">We'll be Scroll Stopping here!</span>
   </p>
 </div>
 <div id='button-container'>
@@ -104,7 +104,7 @@ var blockedText = `
       public
     </i>
     <span class="button-limit-text">
-      Stop blocking this page
+      Unlimit this site
     </span>
     </button>
 </div>`;
@@ -119,8 +119,8 @@ var notBlockedText = `
   </span>
 </div>
 <div id='popupRemainder'>
-  <p class="popupRemainderText">You're <span class="textEmphasize">free to scroll</span> here.
-  To change that, click on the button below.</p>
+  <p class="popupRemainderText">You can <span class="textEmphasize">scroll freely</span> on this site!
+  To limit scrolling here, click on the button below.</p>
 </div>
 <div id='button-container'>
   <button class="button-limit">
@@ -128,7 +128,7 @@ var notBlockedText = `
       public
     </i>
     <span class="button-limit-text">
-      Limit this page
+      Limit this site
     </span>
     </button>
 </div>`
