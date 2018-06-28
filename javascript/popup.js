@@ -65,9 +65,29 @@ function renderStatus(statusText)
 
 function addSiteFromPopup(url)
 {
-  siteURLs = localStorage["siteURLs"];
-  currentDomain = url.split('/')[2];
+  var siteURLs = localStorage["siteURLs"];
+  currentDomain = url.split('/')[2]; // get everything after http[s]://, and before trailing '/'
   console.log("Adding " + currentDomain);
+}
+
+function removeSiteFromPopup(url) {
+  var siteURLs = localStorage["siteURLs"];
+  currentDomain = url.split('/')[2];
+  var siteArray = siteURLs.split(",");
+  var pxArray = siteURLs.split(",");
+  // Why length - 1? It turns out that the split has '' as an element in the array.
+  // But '' is in everything, so this would always report active.
+	for(var i = 0; i < siteArray.length - 1; i++)
+	{
+		if(url.indexOf(siteArray[i]) > -1)
+		{
+			siteArray.splice(i, 1);
+      pxArray.splice(i, 1);
+      localStorage["siteURLs"] = siteArray;
+    	localStorage["sitePxs"] = pxArray;
+      return;
+		}
+	}
 }
 
 function siteBlocked(url)
@@ -107,7 +127,7 @@ function blockedText(urlFound) {
       </p>
     </div>
     <div id='button-container'>
-      <button class="button-limit" onclick="addSiteFromPopup('`+urlFound+`')">
+      <button id="button-add-site" class="button-limit">
         <i class="material-icons">
           public
         </i>
@@ -133,7 +153,7 @@ function notBlockedText(urlFound) {
     To limit scrolling here, click on the button below.</p>
   </div>
   <div id='button-container'>
-    <button class="button-limit" onclick="addSiteFromPopup('`+urlFound+`')">
+    <button id="button-add-site" class="button-limit">
       <i class="material-icons">
         public
       </i>
@@ -159,7 +179,7 @@ function noSitesText(urlFound) {
     sites set up for Scroll Stop to watch right now.</p>
   </div>
   <div id='button-container'>
-    <button class="button-limit" onclick="addSiteFromPopup('`+urlFound+`')">
+    <button id="button-add-site" class="button-limit">
       <i class="material-icons">
         public
       </i>
@@ -181,15 +201,25 @@ document.addEventListener('DOMContentLoaded', function()
 		if(siteURLs != null && siteBlocked(url))
 		{
 			renderStatus(blockedText(url));
+      document.getElementById("button-add-site").addEventListener("click", function() {
+        removeSiteFromPopup(url);
+        }, false);
 		}
 		else if(siteURLs != null)
 		{
 			renderStatus(notBlockedText(url));
+      document.getElementById("button-add-site").addEventListener("click", function() {
+        addSiteFromPopup(url);
+        }, false);
 		}
 		else
 		{
 			renderStatus(noSitesText(url));
+      document.getElementById("button-add-site").addEventListener("click", function() {
+        addSiteFromPopup(url);
+        }, false);
 		}
+
   });
 });
 
