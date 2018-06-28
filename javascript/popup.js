@@ -63,6 +63,13 @@ function renderStatus(statusText)
   document.getElementById('status').innerHTML = statusText;
 }
 
+function addSiteFromPopup(url)
+{
+  siteURLs = localStorage["siteURLs"];
+  currentDomain = url.split('/')[2];
+  console.log("Adding " + currentDomain);
+}
+
 function siteBlocked(url)
 {
 	var siteURLs = localStorage["siteURLs"];
@@ -84,98 +91,104 @@ function siteBlocked(url)
 	return false;
 }
 
-var blockedText = `
-<div id='popupHeader' style='background-color:#303f9f'>
-  <i class="material-icons">
-    track_changes
-  </i>
-  <span class="popupHeaderText">
-    Active
-  </span>
-</div>
-<div id='popupRemainder'>
-  <p class="popupRemainderText">This page is on your list.
-  <span class="textEmphasize">We'll be scroll stopping here!</span>
-  </p>
-</div>
-<div id='button-container'>
-  <button class="button-limit">
-    <i class="material-icons">
-      public
-    </i>
-    <span class="button-limit-text">
-      Stop blocking this page
-    </span>
-    </button>
-</div>`;
+function blockedText(urlFound) {
+  return `
+    <div id='popupHeader' style='background-color:#303f9f'>
+      <i class="material-icons">
+        track_changes
+      </i>
+      <span class="popupHeaderText">
+        Active
+      </span>
+    </div>
+    <div id='popupRemainder'>
+      <p class="popupRemainderText">This page is on your list.
+      <span class="textEmphasize">We'll be scroll stopping here!</span>
+      </p>
+    </div>
+    <div id='button-container'>
+      <button class="button-limit" onclick="addSiteFromPopup('`+urlFound+`')">
+        <i class="material-icons">
+          public
+        </i>
+        <span class="button-limit-text">
+          Stop blocking this page
+        </span>
+        </button>
+    </div>`;
+}
 
-var notBlockedText = `
-<div id='popupHeader' style='background-color:#546e7a'>
-  <i class="material-icons">
-    notifications_off
-  </i>
-  <span class="popupHeaderText">
-    Inactive
-  </span>
-</div>
-<div id='popupRemainder'>
-  <p class="popupRemainderText">You're <span class="textEmphasize">free to scroll</span> here.
-  To change that, click on the button below.</p>
-</div>
-<div id='button-container'>
-  <button class="button-limit">
+function notBlockedText(urlFound) {
+  return `
+  <div id='popupHeader' style='background-color:#546e7a'>
     <i class="material-icons">
-      public
+      notifications_off
     </i>
-    <span class="button-limit-text">
-      Limit this page
+    <span class="popupHeaderText">
+      Inactive
     </span>
-    </button>
-</div>`
+  </div>
+  <div id='popupRemainder'>
+    <p class="popupRemainderText">You're <span class="textEmphasize">free to scroll</span> here.
+    To change that, click on the button below.</p>
+  </div>
+  <div id='button-container'>
+    <button class="button-limit" onclick="addSiteFromPopup('`+urlFound+`')">
+      <i class="material-icons">
+        public
+      </i>
+      <span class="button-limit-text">
+        Limit this page
+      </span>
+      </button>
+  </div>`;
+}
 
-var noSitesText = `
-<div id='popupHeader' style='background-color:#707070'>
-  <i class="material-icons">
-    announcement
-  </i>
-  <span class="popupHeaderText">
-    No Sites Added
-  </span>
-</div>
-<div id='popupRemainder'>
-  <p class="popupRemainderText">There are <span class="textEmphasize">no</span>
-  sites set up for Scroll Stop to watch right now.</p>
-</div>
-<div id='button-container'>
-  <button class="button-limit">
+function noSitesText(urlFound) {
+  return `
+  <div id='popupHeader' style='background-color:#707070'>
     <i class="material-icons">
-      public
+      announcement
     </i>
-    <span class="button-limit-text">
-      Limit this page
+    <span class="popupHeaderText">
+      No Sites Added
     </span>
-    </button>
-</div>
-`;
+  </div>
+  <div id='popupRemainder'>
+    <p class="popupRemainderText">There are <span class="textEmphasize">no</span>
+    sites set up for Scroll Stop to watch right now.</p>
+  </div>
+  <div id='button-container'>
+    <button class="button-limit" onclick="addSiteFromPopup('`+urlFound+`')">
+      <i class="material-icons">
+        public
+      </i>
+      <span class="button-limit-text">
+        Limit this page
+      </span>
+      </button>
+  </div>
+  `;
+}
 
 
 document.addEventListener('DOMContentLoaded', function()
 {
 	getCurrentTabUrl(function(url)
 	{
-		var siteURLs = localStorage["siteURLs"];
+    var siteURLs = localStorage["siteURLs"];
 
 		if(siteURLs != null && siteBlocked(url))
 		{
-			renderStatus(blockedText);
+			renderStatus(blockedText(url));
 		}
 		else if(siteURLs != null)
 		{
-			renderStatus(notBlockedText);
+			renderStatus(notBlockedText(url));
 		}
 		else
 		{
-			renderStatus(noSitesText);
+			renderStatus(noSitesText(url));
 		}
   });
 });
