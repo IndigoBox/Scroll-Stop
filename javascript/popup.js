@@ -87,6 +87,8 @@ function addSiteFromPopup(url)
   localStorage["siteURLs"] = siteURLList;
   localStorage["sitePxs"] = sitePXList;
 
+  renderStatus(blockedText(url));
+
 }
 
 function removeSiteFromPopup(url) {
@@ -107,6 +109,7 @@ function removeSiteFromPopup(url) {
       pxArray.splice(i, 1);
       localStorage["siteURLs"] = siteArray;
     	localStorage["sitePxs"] = pxArray;
+      renderStatus(notBlockedText(url));
       return;
 		}
 	}
