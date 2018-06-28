@@ -66,20 +66,42 @@ function renderStatus(statusText)
 function addSiteFromPopup(url)
 {
   var siteURLs = localStorage["siteURLs"];
+  var sitePXs = localStorage["sitePxs"];
   currentDomain = url.split('/')[2]; // get everything after http[s]://, and before trailing '/'
   console.log("Adding " + currentDomain);
+  var siteURLList;
+  var sitePXList;
+  if(siteURLs == null)
+  {
+		siteURLList = [];
+    sitePXList = [];
+	}
+  else {
+    siteURLList = siteURLs.split(",");
+    sitePXList = siteURLs.split(",");
+  }
+  siteURLList.push(currentDomain);
+  sitePXList.push(500); // Default is 500 pixels, which is what is added if done via the button.
+
+  // Update the database.
+  localStorage["siteURLs"] = siteURLList;
+  localStorage["sitePxs"] = sitePXList;
+
 }
 
 function removeSiteFromPopup(url) {
   var siteURLs = localStorage["siteURLs"];
+  var sitePXs = localStorage["sitePxs"];
   currentDomain = url.split('/')[2];
   var siteArray = siteURLs.split(",");
-  var pxArray = siteURLs.split(",");
+  var pxArray = sitePXs.split(",");
   // Why length - 1? It turns out that the split has '' as an element in the array.
   // But '' is in everything, so this would always report active.
-	for(var i = 0; i < siteArray.length - 1; i++)
+	for(var i = 0; i < siteArray.length; i++)
 	{
-		if(url.indexOf(siteArray[i]) > -1)
+    console.log(siteArray[i]);
+    console.log(currentDomain);
+		if(currentDomain.indexOf(siteArray[i]) > -1)
 		{
 			siteArray.splice(i, 1);
       pxArray.splice(i, 1);
@@ -98,11 +120,9 @@ function siteBlocked(url)
 	var siteArray = siteURLs.split(",");
   // Why length - 1? It turns out that the split has '' as an element in the array.
   // But '' is in everything, so this would always report active.
-	for(var i = 0; i < siteArray.length - 1; i++)
+	for(var i = 0; i < siteArray.length; i++)
 	{
-    console.log(url);
-    console.log(siteArray[i]);
-		if(url.indexOf(siteArray[i]) > -1)
+		if((url.indexOf(siteArray[i]) > -1) && siteArray[i] != '')
 		{
 			websiteIndex = i;
 			return true;
@@ -197,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function()
 	getCurrentTabUrl(function(url)
 	{
     var siteURLs = localStorage["siteURLs"];
-
+    console.log(localStorage["siteURLs"]);
 		if(siteURLs != null && siteBlocked(url))
 		{
 			renderStatus(blockedText(url));
