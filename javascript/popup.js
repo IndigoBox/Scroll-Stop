@@ -50,6 +50,35 @@ function getCurrentTabUrl(callback) {
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
+function refreshCurrentTab() {
+  // A mostly line-by-line copy of the above function, with the exception that a reload is called
+  // and no callback is used. Otherwise, same query, same information.
+
+  // Set up so that it gets only tabs that the user is looking at, in the current window.
+  var queryInfo = {
+    active: true,
+    currentWindow: true
+  };
+
+  chrome.tabs.query(queryInfo, function(tabs) {
+    // chrome.tabs.query invokes the callback with a list of tabs that match the
+    // query. When the popup is opened, there is certainly a window and at least
+    // one tab, so we can safely assume that |tabs| is a non-empty array.
+    // A window can only have one active tab at a time, so the array consists of
+    // exactly one tab.
+    var tab = tabs[0];
+
+    // A tab is a plain object that provides information about the tab.
+    // See https://developer.chrome.com/extensions/tabs#type-Tab
+    var id = tab.id;
+
+    // Call Chrome's API on the tab isolated by its ID.
+    chrome.tabs.reload(id);
+  });
+
+
+}
+
 /**
  * @param {string} searchTerm - Search term for Google Image search.
  * @param {function(string,number,number)} callback - Called when an image has
@@ -87,7 +116,10 @@ function addSiteFromPopup(url)
   localStorage["siteURLs"] = siteURLList;
   localStorage["sitePxs"] = sitePXList;
 
-  renderStatus(blockedText(url));
+  renderStatus(reloadPage());
+  document.getElementById("refresh-container").addEventListener("click", function() {
+    refreshCurrentTab();
+    }, false);
 
 }
 
@@ -109,7 +141,10 @@ function removeSiteFromPopup(url) {
       pxArray.splice(i, 1);
       localStorage["siteURLs"] = siteArray;
     	localStorage["sitePxs"] = pxArray;
-      renderStatus(notBlockedText(url));
+      renderStatus(reloadPage());
+      document.getElementById("refresh-container").addEventListener("click", function() {
+        refreshCurrentTab();
+        }, false);
       return;
 		}
 	}
@@ -210,6 +245,20 @@ function noSitesText(urlFound) {
         Limit this site
       </span>
       </button>
+  </div>
+  `;
+}
+
+function reloadPage() {
+  return `
+  <center id="refresh-container">
+    <span class="refresh-icon"><i class="material-icons">
+      refresh
+    </i></span>
+  </center>
+  <div id='popupRemainder'>
+    <p class="popupRemainderText">Got it! Please <span class="textEmphasize">reload</span>
+    your current tab to see your changes.</p>
   </div>
   `;
 }
