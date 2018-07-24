@@ -50,6 +50,35 @@ function getCurrentTabUrl(callback) {
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
+function refreshCurrentTab() {
+  // A mostly line-by-line copy of the above function, with the exception that a reload is called
+  // and no callback is used. Otherwise, same query, same information.
+
+  // Set up so that it gets only tabs that the user is looking at, in the current window.
+  var queryInfo = {
+    active: true,
+    currentWindow: true
+  };
+
+  chrome.tabs.query(queryInfo, function(tabs) {
+    // chrome.tabs.query invokes the callback with a list of tabs that match the
+    // query. When the popup is opened, there is certainly a window and at least
+    // one tab, so we can safely assume that |tabs| is a non-empty array.
+    // A window can only have one active tab at a time, so the array consists of
+    // exactly one tab.
+    var tab = tabs[0];
+
+    // A tab is a plain object that provides information about the tab.
+    // See https://developer.chrome.com/extensions/tabs#type-Tab
+    var id = tab.id;
+
+    // Call Chrome's API on the tab isolated by its ID.
+    chrome.tabs.reload(id);
+  });
+
+
+}
+
 /**
  * @param {string} searchTerm - Search term for Google Image search.
  * @param {function(string,number,number)} callback - Called when an image has
@@ -63,15 +92,75 @@ function renderStatus(statusText)
   document.getElementById('status').innerHTML = statusText;
 }
 
+function addSiteFromPopup(url)
+{
+  var siteURLs = localStorage["siteURLs"];
+  var sitePXs = localStorage["sitePxs"];
+  currentDomain = url.split('/')[2]; // get everything after http[s]://, and before trailing '/'
+  console.log("Adding " + currentDomain);
+  var siteURLList;
+  var sitePXList;
+  if(siteURLs == null)
+  {
+		siteURLList = [];
+    sitePXList = [];
+	}
+  else {
+    siteURLList = siteURLs.split(",");
+    sitePXList = siteURLs.split(",");
+  }
+  siteURLList.push(currentDomain);
+  sitePXList.push(500); // Default is 500 pixels, which is what is added if done via the button.
+
+  // Update the database.
+  localStorage["siteURLs"] = siteURLList;
+  localStorage["sitePxs"] = sitePXList;
+
+  renderStatus(reloadPage());
+  document.getElementById("refresh-container").addEventListener("click", function() {
+    refreshCurrentTab();
+    }, false);
+
+}
+
+function removeSiteFromPopup(url) {
+  var siteURLs = localStorage["siteURLs"];
+  var sitePXs = localStorage["sitePxs"];
+  currentDomain = url.split('/')[2];
+  var siteArray = siteURLs.split(",");
+  var pxArray = sitePXs.split(",");
+  // Why length - 1? It turns out that the split has '' as an element in the array.
+  // But '' is in everything, so this would always report active.
+	for(var i = 0; i < siteArray.length; i++)
+	{
+    console.log(siteArray[i]);
+    console.log(currentDomain);
+		if(currentDomain.indexOf(siteArray[i]) > -1)
+		{
+			siteArray.splice(i, 1);
+      pxArray.splice(i, 1);
+      localStorage["siteURLs"] = siteArray;
+    	localStorage["sitePxs"] = pxArray;
+      renderStatus(reloadPage());
+      document.getElementById("refresh-container").addEventListener("click", function() {
+        refreshCurrentTab();
+        }, false);
+      return;
+		}
+	}
+}
+
 function siteBlocked(url)
 {
 	var siteURLs = localStorage["siteURLs"];
 	if(typeof siteURLs == 'undefined')
 		return false
 	var siteArray = siteURLs.split(",");
+  // Why length - 1? It turns out that the split has '' as an element in the array.
+  // But '' is in everything, so this would always report active.
 	for(var i = 0; i < siteArray.length; i++)
 	{
-		if(url.indexOf(siteArray[i]) > -1)
+		if((url.indexOf(siteArray[i]) > -1) && siteArray[i] != '')
 		{
 			websiteIndex = i;
 			return true;
@@ -80,24 +169,129 @@ function siteBlocked(url)
 	return false;
 }
 
+function blockedText(urlFound) {
+  return `
+    <div id='popupHeader' style='background-color:#303f9f'>
+      <i class="material-icons">
+        track_changes
+      </i>
+      <span class="popupHeaderText">
+        Active
+      </span>
+    </div>
+    <div id='popupRemainder'>
+      <p class="popupRemainderText">You've limited scrolling on this site.
+      <span class="textEmphasize">We'll be scroll stopping here!</span>
+      </p>
+    </div>
+    <div id='button-container'>
+      <button id="button-add-site" class="button-limit">
+        <i class="material-icons">
+          public
+        </i>
+        <span class="button-limit-text">
+          Unlimit this site
+        </span>
+        </button>
+    </div>`;
+}
+
+function notBlockedText(urlFound) {
+  return `
+  <div id='popupHeader' style='background-color:#546e7a'>
+    <i class="material-icons">
+      notifications_off
+    </i>
+    <span class="popupHeaderText">
+      Inactive
+    </span>
+  </div>
+  <div id='popupRemainder'>
+    <p class="popupRemainderText">You can <span class="textEmphasize">scroll freely</span> on this site!
+    To limit scrolling here, click on the button below.</p>
+  </div>
+  <div id='button-container'>
+    <button id="button-add-site" class="button-limit">
+      <i class="material-icons">
+        public
+      </i>
+      <span class="button-limit-text">
+        Limit this site
+      </span>
+      </button>
+  </div>`;
+}
+
+function noSitesText(urlFound) {
+  return `
+  <div id='popupHeader' style='background-color:#707070'>
+    <i class="material-icons">
+      announcement
+    </i>
+    <span class="popupHeaderText">
+      No Sites Added
+    </span>
+  </div>
+  <div id='popupRemainder'>
+    <p class="popupRemainderText">There are <span class="textEmphasize">no</span>
+    sites set up for Scroll Stop to watch right now.</p>
+  </div>
+  <div id='button-container'>
+    <button id="button-add-site" class="button-limit">
+      <i class="material-icons">
+        public
+      </i>
+      <span class="button-limit-text">
+        Limit this site
+      </span>
+      </button>
+  </div>
+  `;
+}
+
+function reloadPage() {
+  return `
+  <center id="refresh-container">
+    <span class="refresh-icon"><i class="material-icons">
+      refresh
+    </i></span>
+  </center>
+  <div id='popupRemainder'>
+    <p class="popupRemainderText">Got it! Please <span class="textEmphasize">reload</span>
+    your current tab to see your changes.</p>
+  </div>
+  `;
+}
+
+
 document.addEventListener('DOMContentLoaded', function()
 {
 	getCurrentTabUrl(function(url)
 	{
-		var siteURLs = localStorage["siteURLs"];
-
+    var siteURLs = localStorage["siteURLs"];
+    console.log(localStorage["siteURLs"]);
 		if(siteURLs != null && siteBlocked(url))
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#0F0'>Active</div><div id='popupRemainder'><img id='popupLogo' src='../images/icon48.png'><p>This page is on your list, we'll be scroll stopping here!</p></div>");
+			renderStatus(blockedText(url));
+      document.getElementById("button-add-site").addEventListener("click", function() {
+        removeSiteFromPopup(url);
+        }, false);
 		}
 		else if(siteURLs != null)
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#F00'>Inactive</div><div id='popupRemainder'><img id='popupLogo' src='../images/icon48.png'><p>You're free to scroll here. To change that, click on the button below.</p></div>");
+			renderStatus(notBlockedText(url));
+      document.getElementById("button-add-site").addEventListener("click", function() {
+        addSiteFromPopup(url);
+        }, false);
 		}
 		else
 		{
-			renderStatus("<div id='popupHeader' style='background-color:#AAA'>This is awkward.</div><div id='popupRemainder'><img id='popupLogo' src='../images/icon48.png'><p>Scroll Stop does not have any sites to restrict scrolling on right now.</p></div>");
+			renderStatus(noSitesText(url));
+      document.getElementById("button-add-site").addEventListener("click", function() {
+        addSiteFromPopup(url);
+        }, false);
 		}
+
   });
 });
 

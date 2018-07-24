@@ -1,6 +1,6 @@
 body
 {
-	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+	font-family: "Segoe UI", 'Product Sans', "Lucida Grande", Tahoma, sans-serif;
 	font-size: 100%;
 	margin: 0px;
 }
@@ -136,10 +136,10 @@ ul
 }
 #popupBody
 {
-	font-family: "Open Sans", "Lucida Grande", Tahoma, sans-serif;
+	font-family: "Segoe UI", "Open Sans", "Lucida Grande", Tahoma, sans-serif;
 	font-size: 100%;
 	width: 300px;
-	background: #F7F7F7;
+	background: #FEFEFE;
 	height:250px;
 }
 #status
@@ -216,17 +216,15 @@ ul
 }
 #options-cont
 {
-	border-top: solid 2px grey;
-	margin-top: 5px;
+	margin-top: 15px;
 	padding-bottom: 5px;
-	background: #D4D4D4;
-	bottom:0px;
-	position:absolute;
 	width:100%;
+	color: #AC8484;
+	text-align: center;
 }
 #options-cont:hover
 {
-	background: #BDBDBD;
+	color: #AC8484;
 }
 #facebook
 {
@@ -250,29 +248,104 @@ ul
 }
 #popupHeader {
 	background-color:Green;
-	top:0px;
-	left:0px;
+	top:-3px;
+	left:-5px;
 	right:0px;
 	width:100%;
-	height:24px;
-	position:absolute;
+	height:30px;
+	position: relative;
 	color:#FFF;
-	font-variant: small-caps;
-	letter-spacing: 3px;
-	font-size:16px;
+	letter-spacing: 1px;
+	font-size:18px;
 	padding:4px;
 	text-align: center;
 	font-weight:500;
-	box-shadow:0px 4px 4px #555;
+	box-shadow:0px 3px 6px #0000002e;
+	fill: currentColor;
 }
 #popupRemainder {
 	top:70px;
-
 	right:5px;
-	height:200px;
 	text-align:center;
 	/*padding:5px;*/
-	letter-spacing:1.4px;
+	letter-spacing:0.5px;
 	font-size:14px;
-	position: absolute;
+	padding-top:15px;
+}
+.popupIcon {
+	width:24px;
+	color:white;
+}
+.popupHeaderText {
+	padding-left: 4px;
+	vertical-align: middle;
+}
+svg {
+	fill: currentColor;
+	width: 24px;
+}
+.material-icons {
+	padding-right:4px;
+	vertical-align: middle;
+}
+.textEmphasize {
+	color:#ff0000;
+	font-weight: 500;
+}
+.popupRemainderText {
+margin-left: 10%;
+margin-right: 10%;
+}
+
+.button-limit {
+	color: #B80A0A;
+	text-align:center;
+	box-shadow: 0px 3px 4px #0000002e;
+	background-color: #F6F6F6;
+	border: none;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-family: 'Segoe UI', 'Open Sans', sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.2px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:5px;
+	margin-bottom: 5px;
+	cursor:pointer;
+}
+
+.button-limit:hover {
+	background-color: #F1F1F1;
+}
+
+.button-limit-text {
+	vertical-align: middle;
+}
+
+#button-container {
+	text-align:center;
+}
+
+.refresh-icon {
+	background-color: steelblue;
+	color: white;
+	font-size: 24px;
+	position: relative;
+	padding-bottom: 13px;
+	border-radius: 500px;
+	padding-left: 11px;
+	padding-right: 9px;
+	padding-top: 2px;
+	vertical-align: baseline;
+	box-shadow: 0px 1px 3px grey;
+	display: inline-block;
+	margin-bottom: -10px;
+}
+
+#refresh-container {
+	padding-top:20px;
+	cursor:pointer;
 }
