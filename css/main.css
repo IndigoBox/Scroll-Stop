@@ -1,59 +1,99 @@
 /* Import Open Sans from Google Fonts */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 
 /* Make all elements use Open Sans by default */
 body, * { font-family: 'Open Sans', sans-serif; }
 
 body
 {
-	font-size: 1em;
+	color: #262626;
+	font-size: 16px;
 	margin: 0px;
 }
 a
 {
-	color: black;
 	text-decoration: none;
 }
 input
 {
 	padding-left: 5px;
 }
-#sideMenu li
+select, input {
+	background: #fff;
+	border: solid 1px #b1afaf;
+	border-radius: 3px;
+	font-size: 1rem;
+}
+button {
+	cursor: pointer;
+	padding: 5px 15px;
+	color: #3c3737;
+	background-color: #F6F6F6;
+	border: none;
+	border-radius: 5px;
+	font-weight: 600;
+	text-align: center;
+	box-shadow: 0px 3px 4px #0000002e;
+	letter-spacing: 0.2px;
+	transition: background 0.2s;
+}
+button:hover, button:focus {
+	background-color: #eae7e7;
+}
+
+button.green {
+	color: #fff;
+	background-color: #008a00;
+}
+button.green:hover, button.green:focus {
+	background-color: #007000;
+}
+
+/* Space out a button following a button */
+button + button {
+	margin-left: 5px;
+}
+input[type="radio"] { margin-right: 10px; }
+#sideMenu ul
 {
+	margin: 0;
+	padding: 0;
 	position: relative;
 	top: 70px;
 	list-style: none;
-	font-weight: bolder;
+	font-weight: 600;
 	font-size: 20px;
+	padding-top: 10px;
 }
 #sideMenu a
 {
-	transition: color 0.2s;
+	display: block;
+	padding: 10px 40px;
+	color: #6b6b6b;
 }
-#sideMenu a:hover
-{
-	color: red;
+#sideMenu li {
+	transition: background-color 0.2s;
+	margin: 0;
 }
-#sideMenu a.active
+#sideMenu li:hover {
+	background-color: #c7c6c6;
+}
+#sideMenu li.active {
+	background-color: #717171;
+}
+#sideMenu li.active a
 {
 	cursor: default;
-	color: red;
+	color: white;
 	text-decoration: none !important;
-}
-ul
-{
-	margin-top: 5px;
-	margin-bottom: 0px;
 }
 #header
 {
 	position: absolute;
 	z-index: 1;
 	width: 100%;
-	color: black;
 	height: 60px;
 	min-width: 860px;
-	/* Old from indigoBox: background: linear-gradient(to bottom, #222222, #111111); */
 	background: #D2CFCF;
 }
 #headerText
@@ -83,7 +123,7 @@ ul
 	bottom: 0px;
 	width: 210px;
 	height: 100%;
-	background: linear-gradient(to right, white, rgb(228, 228, 228));
+	background: #e4e4e4;
 }
 #siteTitler
 {
@@ -125,22 +165,17 @@ ul
 	margin-left: 5px;
 	padding: 1px;
 }
-.closeImage
-{
-	padding: 5px;
+.close-btn {
+	background: none;
+	box-shadow: none;
+	display: flex;
 	margin-left: 15px;
-	cursor: pointer;
-	width: 20px;
+	padding: 8px;
 	border-radius: 100px;
-	transition: background 0.2s;
 }
-.closeImage:hover
-{
-	background: #D8D8D8;
-}
+.closeImage { width: 18px; }
 #popupBody
 {
-	font-family: "Segoe UI", "Open Sans", "Lucida Grande", Tahoma, sans-serif;
 	font-size: 100%;
 	width: 300px;
 	background: #FEFEFE;
@@ -182,8 +217,8 @@ ul
 	position: absolute;
 	height: 21px;
 	color: green;
-	top: 2px;
-	left: 160px;
+	top: 5px;
+	left: 300px;
 }
 #pause
 {
@@ -234,7 +269,7 @@ ul
 	margin-top: 25px;
 }
 #buttons-bar button {
-
+	font-size: 1rem;
 }
 .popActive {
 	color:Green;
@@ -296,15 +331,8 @@ margin-right: 10%;
 
 .button-limit {
 	color: #B80A0A;
-	text-align:center;
-	box-shadow: 0px 3px 4px #0000002e;
-	background-color: #F6F6F6;
-	border: none;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	font-family: 'Segoe UI', 'Open Sans', sans-serif;
-	font-weight: 600;
-	letter-spacing: 0.2px;
 	padding-left: 15px;
 	padding-right: 15px;
 	margin-left: auto;

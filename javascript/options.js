@@ -24,11 +24,13 @@ function addSite()
 function addSiteField(index)
 {
 	document.getElementById("sites").insertAdjacentHTML('beforeend', '<div class="option-row" id="row' + index
-	+ '"><span>On &nbsp;</span><input class="siteURL" placeholder="example.com" id="siteURL' + index
-	+ '" type="text"></input><span> &nbsp;stop after &nbsp;</span><input class="pxNum" value="500" id="pxNum' + index
+	+ '"><span>On&nbsp;</span><input class="siteURL" placeholder="example.com" id="siteURL' + index
+	+ '" type="text"></input><span>&nbsp;stop after&nbsp;</span><input class="pxNum" value="500" id="pxNum' + index
 	+ '" type="number" min="0"></input><select class="limitType"><option value="pixels">pixels</option>'
-	+ '<option value="screens">screens</option></select><img class="closeImage" id="remove' + index
-	+ '" src="../images/cross.png"><br></div>');
+	+ '<option value="screens">screens</option></select>'
+	+ '<button class="close-btn"  id="remove' + index + '">'
+	  + '<img class="closeImage" src="../images/cross.png">'
+	+ '</button><br></div>');
 	document.getElementById("remove" + index).addEventListener("click", function(){removeSite(index)});
 }
 
