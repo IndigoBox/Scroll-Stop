@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Scroll Stop",
-  "options_page": "options.html",
+  "options_page": "settings.html",
   "description": "Stop scrolling too far, and stay focused on what's important",
   "version": "0.0.6",
 
