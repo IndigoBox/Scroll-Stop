@@ -92,14 +92,17 @@ function renderStatus(statusText)
   document.getElementById('status').innerHTML = statusText;
 }
 
+// Limit a site from the popup, given a URL
 function addSiteFromPopup(url)
 {
   var siteURLs = localStorage["siteURLs"];
   var sitePXs = localStorage["sitePxs"];
+
   currentDomain = url.split('/')[2]; // get everything after http[s]://, and before trailing '/'
-  console.log("Adding " + currentDomain);
+
   var siteURLList;
   var sitePXList;
+
   if(siteURLs == null)
   {
 		siteURLList = [];
@@ -107,7 +110,7 @@ function addSiteFromPopup(url)
 	}
   else {
     siteURLList = siteURLs.split(",");
-    sitePXList = siteURLs.split(",");
+    sitePXList = sitePXs.split(",");
   }
   siteURLList.push(currentDomain);
   sitePXList.push(500); // Default is 500 pixels, which is what is added if done via the button.
@@ -133,8 +136,6 @@ function removeSiteFromPopup(url) {
   // But '' is in everything, so this would always report active.
 	for(var i = 0; i < siteArray.length; i++)
 	{
-    console.log(siteArray[i]);
-    console.log(currentDomain);
 		if(currentDomain.indexOf(siteArray[i]) > -1)
 		{
 			siteArray.splice(i, 1);
@@ -269,7 +270,6 @@ document.addEventListener('DOMContentLoaded', function()
 	getCurrentTabUrl(function(url)
 	{
     var siteURLs = localStorage["siteURLs"];
-    console.log(localStorage["siteURLs"]);
 		if(siteURLs != null && siteBlocked(url))
 		{
 			renderStatus(blockedText(url));

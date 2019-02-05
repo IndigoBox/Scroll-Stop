@@ -4,7 +4,7 @@
 
 <html>
   <head>
-    <title>Scroll Stop - Options</title>
+    <title>Scroll Stop - Settings</title>
 	<script type="text/javascript" src="javascript/options.js"></script>
 	<script src="javascript/jquery-1.11.2.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -12,32 +12,55 @@
 	<body>
 	<div id="header"><img id="logo" src="images/icon48.png"><div id="headerText">Scroll Stop</div></div>
 	<div id="sideMenu">
-		<li>
-		<ul><a class="active" href="/options.html">Settings</a></ul>
-		<ul><a href="/about.html">About</a></ul>
-		<ul><a href="/help.html">Help</a></ul>
-		</li>
+		<ul>
+			<li class="active">
+				<a href="/settings.html">Settings</a>
+			</li>
+			<li>
+				<a href="/about.html">About</a>
+			</li>
+			<li>
+				<a href="/help.html">Help</a>
+			</li>
+		</ul>
 	</div>
 	<div id="main">
-		<div id="siteTitler">Sites To Limit</div>
+		<h1>Settings</h1>
+
+		<h2>Sites To Limit</h2>
+
 		<div id="sites">
+			<!-- Make sure this matches the HTML in addSiteField() -->
 			<div class="option-row" id="row0">
-				On <input class="siteURL" id="siteURL0" placeholder="example.com" type="text"></input> stop after
-				<input class="pxNum" id="pxNum0" type="number" value ="5" min="0"></input><select class="limitType"><option value="pixels">pixels</option><option value="screens">screens</option></select><img class="closeImage" id="remove0" src="images/cross.png"><br>
+				<span>On&nbsp;</span>
+				<input class="siteURL" id="siteURL0" placeholder="example.com" type="text"></input>
+				<span>&nbsp;stop after&nbsp;</span>
+				<input class="pxNum" id="pxNum0" type="number" value ="5" min="0"></input>
+				<select class="limitType">
+					<option value="pixels">pixels</option>
+					<option value="screens">screens</option>
+				</select>
+				<button class="close-btn" id="remove0">
+					<img class="closeImage" src="images/cross.png">
+				</button>
 			</div>
 		</div>
 		<button id="add">Add Site</button>
-		<br><br>
-		<div id="siteTitler">Action</div>
-		What should happen when you scroll too far? <br>
+
+		<h2>Action</h2>
+		<p>
+			What should happen when you scroll too far?
+		</p>
 		<input type="radio" name="closeBehav" value="close" checked="checked">Close tab <br>
 		<input type="radio" name="closeBehav" value="remove">Make tab blank <br>
 		<input type="radio" name="closeBehav" value="alert">Print a reminder message<br>
 		<input type="radio" name="closeBehav" value="redirect">Go to <input id="redirectURL" placeholder="example.com" type="text"></input><br>
+
 		<div id="buttons-bar">
-		<button id="save">Save</button>
-		<button id="reset">Restore default</button>
-		<span id="checkmark" style="display: none">Saved &#x2714</span></div>
+			<button id="save" class="green">Save Settings</button>
+			<button id="reset">Clear Settings</button>
+			<span id="checkmark" style="display: none">Saved &#x2714</span>
+		</div>
 	</div>
   </body>
 </html>
